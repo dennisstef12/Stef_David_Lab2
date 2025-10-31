@@ -9,16 +9,19 @@
 
 <h4>Book</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Book.ID" />
+
             <div class="form-group">
                 <label asp-for="Book.Title" class="control-label"></label>
                 <input asp-for="Book.Title" class="form-control" />
                 <span asp-validation-for="Book.Title" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Book.AuthorID" class="control-label">Author</label>
                 <select asp-for="Book.AuthorID" class="form-control" asp-items="ViewBag.AuthorID"></select>
@@ -30,28 +33,49 @@
                 <input asp-for="Book.Price" class="form-control" />
                 <span asp-validation-for="Book.Price" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Book.PublishingDate" class="control-label"></label>
                 <input asp-for="Book.PublishingDate" class="form-control" />
-                <span asp-validation-for="Book.PublishingDate" class="textdanger"></span>
+                <span asp-validation-for="Book.PublishingDate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Book.PublisherID" class="control-label">Publisher Name</label>
-                <select asp-for="Book.PublisherID" class="form-control" asp-items="ViewBag.PublisherID">
-                </select>
+                <label asp-for="Book.PublisherID" class="control-label">Publisher</label>
+                <select asp-for="Book.PublisherID" class="form-control" asp-items="ViewBag.PublisherID"></select>
                 <span asp-validation-for="Book.PublisherID" class="text-danger"></span>
             </div>
+
             <div class="form-group">
+                <label class="control-label">Categories</label>
+                <div>
+                    @if (Model.AssignedCategoryDataList != null)
+                    {
+                        foreach (var category in Model.AssignedCategoryDataList)
+                        {
+                            <div class="form-check">
+                                <input type="checkbox"
+                                       name="selectedCategories"
+                                       value="@category.CategoryID"
+                                       class="form-check-input"
+                                       @(category.Assigned ? "checked=\"checked\"" : "") />
+                                <label class="form-check-label">@category.Name</label>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-page="./Index" class="btn btn-secondary ms-2">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
