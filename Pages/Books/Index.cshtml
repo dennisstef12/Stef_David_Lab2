@@ -11,15 +11,29 @@
     <a asp-page="Create" class="btn btn-primary">Create New</a>
 </p>
 
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Book Title / Author Name:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th>Title</th>
-            <th>Author</th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.TitleSort">Title</a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.AuthorSort">Author</a>
+            </th>
             <th>Price</th>
             <th>Publishing Date</th>
             <th>Publisher</th>
-            <th>Categories</th> <!-- ✅ Nou -->
+            <th>Categories</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -33,7 +47,6 @@
                 <td>@item.PublishingDate.ToShortDateString()</td>
                 <td>@(item.Publisher != null ? item.Publisher.PublisherName : "-")</td>
 
-                <!-- ✅ Afișare categorii pentru fiecare carte -->
                 <td>
                     @if (item.BookCategories != null && item.BookCategories.Any())
                     {
