@@ -1,0 +1,43 @@
+﻿@page
+@model Stef_David_Lab2.Pages.Borrowings.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Borrowing</h4>
+    <hr />
+    <dl class="row">
+
+        <dt class="col-sm-2">
+            Member
+        </dt>
+        <dd class="col-sm-10">
+            @($"{Model.Borrowing.Member.FirstName} {Model.Borrowing.Member.LastName}")
+        </dd>
+
+        <dt class="col-sm-2">
+            Book
+        </dt>
+        <dd class="col-sm-10">
+            @($"{Model.Borrowing.Book.Title} - {Model.Borrowing.Book.Author.LastName} {Model.Borrowing.Book.Author.FirstName}")
+        </dd>
+
+        <dt class="col-sm-2">
+            Return Date
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Borrowing.ReturnDate.ToShortDateString()
+        </dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" asp-for="Borrowing.ID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>
