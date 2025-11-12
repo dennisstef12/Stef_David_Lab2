@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Stef_David_Lab2.Data;
 
@@ -11,9 +12,11 @@ using Stef_David_Lab2.Data;
 namespace Stef_David_Lab2.Migrations
 {
     [DbContext(typeof(Stef_David_Lab2Context))]
-    partial class Stef_David_Lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20251112161315_FixBookPriceTypeV2")]
+    partial class FixBookPriceTypeV2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

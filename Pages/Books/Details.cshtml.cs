@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Stef_David_Lab2.Data;
 using Stef_David_Lab2.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace Stef_David_Lab2.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
     public class DetailsModel : PageModel
     {
         private readonly Stef_David_Lab2.Data.Stef_David_Lab2Context _context;
